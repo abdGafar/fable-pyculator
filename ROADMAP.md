@@ -78,27 +78,29 @@ Closeout evidence:
 
 ## Phase 1: FABLE-C Notebook Wrapper Maturation
 
-GitHub parent issue: planned after Phase 0 closeout.
+GitHub parent issue: #6.
 
-Status: planned.
+Active branch: `feature/p1-fable-c-notebook-wrapper-maturation`.
+
+Status: active.
 
 Goal: turn the bootstrap selection-control and output-table discoveries into a coherent 2020 FABLE-C
 notebook workflow that can drive a generated Modelwright model, render canonical outputs, and expose
 clear user-guide examples.
 
-- [ ] P1.1 Harden scenario selection control discovery. Child issue: planned.
+- [ ] P1.1 Harden scenario selection control discovery. Child issue: #7.
   - [ ] Validate S.1 through S.16 on the 2020 workbook.
   - [ ] Confirm 2021 compatibility and document differences.
   - [ ] Keep 2019 as an older-structure fragility check.
-- [ ] P1.2 Curate headline output indicators and figures. Child issue: planned.
+- [ ] P1.2 Curate headline output indicators and figures. Child issue: #8.
   - [ ] Use `Indextables` and the canonical output sheets to select initial FOOD, LAND, GHG, and WATER
         headline outputs.
   - [ ] Render notebook-friendly pandas tables and matplotlib figures.
-- [ ] P1.3 Build the first 2020 generated-model notebook loop. Child issue: planned.
+- [ ] P1.3 Build the first 2020 generated-model notebook loop. Child issue: #9.
   - [ ] Load or reference an ignored generated 2020 Modelwright model.
   - [ ] Apply selection-control overrides.
   - [ ] Render discovered output tables and curated headline outputs.
-- [ ] P1.4 Add user-guide documentation and validation evidence. Child issue: planned.
+- [ ] P1.4 Add user-guide documentation and validation evidence. Child issue: #10.
   - [ ] Expand the Sphinx guide around scenario selection, running the model, and reading outputs.
   - [ ] Record 2020 benchmark evidence and 2021 follow-up scope.
 

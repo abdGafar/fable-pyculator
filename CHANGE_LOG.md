@@ -32,3 +32,7 @@ This file records completed project work in chronological order.
   child issues #2 through #5, and recorded the issue mapping in `ROADMAP.md`.
 - Closed Phase 0 after posting verification evidence to child issues #2 through #5 and parent issue
   #1.
+- Activated Phase 1 on `feature/p1-fable-c-notebook-wrapper-maturation`, created GitHub parent issue
+  #6 and child issues #7 through #10, and scoped the phase around hardening FABLE-C selection-control
+  discovery, curating headline outputs and figures, building the first 2020 generated-model notebook
+  loop, and adding user-guide/validation evidence.
