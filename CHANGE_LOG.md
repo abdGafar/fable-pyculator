@@ -30,3 +30,5 @@ This file records completed project work in chronological order.
   created the public `UBC-FRESH/fable-pyculator` GitHub repository, installed and authenticated
   GitHub CLI locally, pushed the bootstrap commit to `main`, created Phase 0 parent issue #1 and
   child issues #2 through #5, and recorded the issue mapping in `ROADMAP.md`.
+- Closed Phase 0 after posting verification evidence to child issues #2 through #5 and parent issue
+  #1.
