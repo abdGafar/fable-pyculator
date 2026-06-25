@@ -36,3 +36,7 @@ This file records completed project work in chronological order.
   #6 and child issues #7 through #10, and scoped the phase around hardening FABLE-C selection-control
   discovery, curating headline outputs and figures, building the first 2020 generated-model notebook
   loop, and adding user-guide/validation evidence.
+- Completed P1.1 by adding opt-in workbook-backed tests that validate the 2020 S.1 through S.16
+  selection-control contract, confirm 2021 shares the same control structure with the known
+  `Affor_scen` default difference, and preserve 2019 as an older 12-control fragility check; recorded
+  findings in `planning/phase-1-selection-control-validation.md`.

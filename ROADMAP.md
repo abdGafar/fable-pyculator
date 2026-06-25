@@ -88,10 +88,11 @@ Goal: turn the bootstrap selection-control and output-table discoveries into a c
 notebook workflow that can drive a generated Modelwright model, render canonical outputs, and expose
 clear user-guide examples.
 
-- [ ] P1.1 Harden scenario selection control discovery. Child issue: #7.
-  - [ ] Validate S.1 through S.16 on the 2020 workbook.
-  - [ ] Confirm 2021 compatibility and document differences.
-  - [ ] Keep 2019 as an older-structure fragility check.
+- [x] P1.1 Harden scenario selection control discovery. Child issue: #7.
+  - Status: complete.
+  - [x] Validate S.1 through S.16 on the 2020 workbook.
+  - [x] Confirm 2021 compatibility and document differences.
+  - [x] Keep 2019 as an older-structure fragility check.
 - [ ] P1.2 Curate headline output indicators and figures. Child issue: #8.
   - [ ] Use `Indextables` and the canonical output sheets to select initial FOOD, LAND, GHG, and WATER
         headline outputs.
@@ -109,3 +110,16 @@ Acceptance boundary:
 - May claim a coherent early FABLE-C notebook wrapper workflow for the inspected 2020 workbook.
 - Must not claim production readiness or cross-country support until country-specific validation
   evidence is recorded.
+
+Implementation evidence:
+
+- Added opt-in workbook-backed tests for the 2020, 2021, and 2019 public FABLE-C workbooks.
+- Added `planning/phase-1-selection-control-validation.md` with validation findings.
+
+Verification evidence:
+
+- `.venv/bin/python -m ruff check .` passed.
+- `.venv/bin/python -m pytest` passed with workbook-backed tests skipped by default.
+- `.venv/bin/sphinx-build -b html docs _build/html -W` passed.
+- `FABLE_PYCULATOR_RUN_WORKBOOK_TESTS=1 .venv/bin/python -m pytest -vv tests/test_fable_workbook_selection_controls.py`
+  passed against ignored local workbook artifacts.
