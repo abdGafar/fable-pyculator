@@ -7,7 +7,7 @@ Modelwright-generated Python models while preserving Modelwright as the generic 
 
 ## Current Next Steps
 
-- Continue Phase 1 with P1.4 after P1.3 is committed, pushed, and issue #9 is closed.
+- Open the Phase 1 PR after P1.4 is committed, pushed, and issue #10 is closed.
 - Treat the phase close-out PR as the docs deployment gate: Sphinx must build on the PR, and the
   merge to `main` must trigger the GitHub Pages deployment workflow.
 
@@ -107,9 +107,10 @@ clear user-guide examples.
   - [x] Load or reference an ignored generated 2020 Modelwright model.
   - [x] Apply selection-control overrides.
   - [x] Render discovered output tables and curated headline outputs.
-- [ ] P1.4 Add user-guide documentation and validation evidence. Child issue: #10.
-  - [ ] Expand the Sphinx guide around scenario selection, running the model, and reading outputs.
-  - [ ] Record 2020 benchmark evidence and 2021 follow-up scope.
+- [x] P1.4 Add user-guide documentation and validation evidence. Child issue: #10.
+  - Status: complete.
+  - [x] Expand the Sphinx guide around scenario selection, running the model, and reading outputs.
+  - [x] Record 2020 benchmark evidence and 2021 follow-up scope.
 
 Acceptance boundary:
 
@@ -133,6 +134,10 @@ Implementation evidence:
 - Added tracked example notebook `examples/notebooks/fable-pyculator-2020-loop.ipynb`.
 - Added `planning/phase-1-2020-notebook-loop.md` with ignored generated-model artifact paths and
   loop boundaries.
+- Added Sphinx guide pages `docs/guides/2020-notebook-workflow.rst` and
+  `docs/guides/validation-scope.rst`.
+- Added `planning/phase-1-user-guide-validation-closeout.md` with Phase 1 closeout evidence and
+  2021 follow-up scope.
 
 Verification evidence:
 

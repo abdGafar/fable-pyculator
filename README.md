@@ -126,6 +126,10 @@ Tracked notebook example:
 examples/notebooks/fable-pyculator-2020-loop.ipynb
 ```
 
+The Sphinx guide expands this into a full workflow under
+`docs/guides/2020-notebook-workflow.rst`, with validation boundaries recorded in
+`docs/guides/validation-scope.rst`.
+
 The public API is intentionally small while the FABLE-specific conventions are being discovered from
 real country calculators.
 

@@ -50,3 +50,6 @@ This file records completed project work in chronological order.
   selection-control overrides, and return rendered output tables plus curated headline frames and
   figures; added `examples/notebooks/fable-pyculator-2020-loop.ipynb` and recorded the contract in
   `planning/phase-1-2020-notebook-loop.md`.
+- Completed P1.4 by adding Sphinx guide pages for the 2020 notebook workflow and validation scope,
+  linking the tracked example notebook into the docs, and recording 2020 benchmark evidence plus 2021
+  follow-up scope in `planning/phase-1-user-guide-validation-closeout.md`.

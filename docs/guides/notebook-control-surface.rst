@@ -9,6 +9,8 @@ multiple cell overrides when running the generated model:
 - the selected option's marker cell receives ``x``;
 - the generated Modelwright model receives those marker-cell overrides as ordinary inputs.
 
+For the current end-to-end 2020 workflow, see :doc:`2020-notebook-workflow`.
+
 Minimal Example
 ---------------
 
@@ -91,9 +93,9 @@ pieces:
 Current Scope
 -------------
 
-The first implementation discovers high-level selection tables. Detailed editable parameter tables
+The current implementation discovers high-level selection tables. Detailed editable parameter tables
 on ``SCENARIOS definition`` still need a separate curation pass before they are exposed as notebook
-inputs. Output table discovery currently maps Excel table cells into DataFrame surfaces; stable
-headline outputs are currently curated for FOOD, LAND, GHG, and WATER. The first curation is still
+inputs. Output table discovery currently maps Excel table cells into DataFrame surfaces; headline
+outputs are currently curated for FOOD, LAND, GHG, and WATER. The first curation is still
 benchmark-oriented. The 2020 notebook loop can run against an ignored generated model artifact, but
 full generated-model equivalence remains a validation-phase claim rather than a wrapper API claim.
