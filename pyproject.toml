@@ -46,6 +46,7 @@ docs = [
   "sphinx-rtd-theme>=2"
 ]
 notebook = [
+  "ipykernel>=6",
   "ipywidgets>=8",
   "matplotlib>=3.8"
 ]

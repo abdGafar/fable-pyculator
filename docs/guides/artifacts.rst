@@ -29,3 +29,16 @@ Downloaded local artifacts in this environment:
 Source URLs and checksums are recorded in ``reference/fable-calculator/README.md`` and
 ``benchmarks/fable-calculator/manifest.json``.
 
+VSCode Environment Bootstrap
+----------------------------
+
+Test users should create a repo-local virtual environment from the ``fable-pyculator`` repository
+root:
+
+.. code-block:: bash
+
+   scripts/bootstrap_dev_env.sh
+
+This installs development, notebook, and documentation dependencies into ``.venv``. In VSCode,
+select ``.venv/bin/python`` as the notebook kernel before running tracked notebooks under
+``examples/notebooks/``.

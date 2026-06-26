@@ -56,3 +56,8 @@ This file records completed project work in chronological order.
 - Aligned FABLE Pyculator's Sphinx configuration and Pages workflow with Modelwright's Read the Docs
   themed documentation setup, including matching RTD theme options, `docs/requirements.txt`, and a
   generated-artifact theme verifier.
+- Added a repo-local VSCode/Jupyter bootstrap script, documented the expected `.venv` notebook
+  kernel, and made the 2020 example notebook resolve the repository root from its working directory
+  instead of assuming the kernel starts at the repo root.
+- Committed the 2020 example notebook after a successful benchmark run so GitHub can render the
+  example output tables and headline figure directly in the browser.

@@ -13,6 +13,20 @@ The tracked example notebook is:
 
 - :download:`fable-pyculator-2020-loop.ipynb <../../examples/notebooks/fable-pyculator-2020-loop.ipynb>`
 
+It is intentionally committed after a successful 2020 benchmark run so GitHub can render the example
+tables and figure directly in the browser.
+
+Before opening it in VSCode, create the repo-local environment from the ``fable-pyculator`` repository
+root:
+
+.. code-block:: bash
+
+   scripts/bootstrap_dev_env.sh
+
+Then select ``.venv/bin/python`` as the notebook kernel. The setup cell prints the active Python
+executable and environment prefix, and warns if the selected kernel does not appear to come from that
+repo-local environment.
+
 Local Artifacts
 ---------------
 
@@ -26,6 +40,14 @@ The default helper paths are:
 The workbook checksum is tracked under ``benchmarks/fable-calculator/checksums.sha256``. The
 generated Python model is intentionally ignored; restore or generate it under ``tmp/`` before running
 the notebook loop.
+
+The tracked notebook resolves the ``fable-pyculator`` repository root from the kernel's current
+working directory before constructing these paths. This matters in VSCode, where the notebook kernel
+may start in ``examples/notebooks/`` instead of the repository root. If the generated model is missing
+and a sibling Modelwright checkout has ``examples/fable_2020/generated_fable_2020_model.py.xz``, the
+notebook materializes that archive into the ignored FABLE Pyculator ``tmp/`` path. If required
+artifacts are still missing, setup reports the missing absolute paths and later execution cells skip
+instead of raising an artifact error.
 
 Build The Spec
 --------------
