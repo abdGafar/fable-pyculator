@@ -85,3 +85,5 @@ This file records completed project work in chronological order.
 - Completed the Phase 4 implementation by adding typed scenario-definition table declarations,
   workbook discovery, pandas inspection helpers, documentation, and synthetic plus opt-in
   workbook-backed validation for the 2020/2021 definition-table inventory.
+- Closed Phase 4 after PR #34 merged to `main` and the post-merge Tests and Docs Pages workflows
+  passed.

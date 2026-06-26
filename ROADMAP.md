@@ -172,7 +172,7 @@ GitHub parent issue: #15.
 
 Active branch: `feature/p2-output-flavour-wildcards`.
 
-Status: active.
+Status: complete.
 
 Goal: add workbook-derived column flavour metadata to discovered output tables and let notebooks
 render DataFrames filtered by tags such as `OUTPUT-1`, `DATA-4`, `CALC`, and `DIRECT` while
@@ -370,4 +370,6 @@ Verification evidence:
 
 Closeout evidence:
 
-- Pending.
+- Phase 4 parent issue #29 is closed.
+- Phase 4 PR #34 merged to `main` with merge commit `862f964`.
+- Post-merge Tests and Docs Pages workflows passed, and GitHub Pages deployed.
