@@ -53,6 +53,7 @@ Run checks with:
   $VENV_DIR/bin/python -m pytest
   $VENV_DIR/bin/sphinx-build -b html docs _build/html -W
   $VENV_DIR/bin/python scripts/verify_docs_theme.py _build/html
+  scripts/check_release_artifacts.sh
 
 Verify local workbook artifacts with:
   sha256sum -c benchmarks/fable-calculator/checksums.sha256

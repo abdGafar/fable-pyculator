@@ -1,4 +1,10 @@
-"""High-level notebook loop helpers for FABLE-C generated models."""
+"""High-level notebook loop helpers for FABLE-C generated models.
+
+This module packages the common 2020 benchmark workflow: build a workbook-derived spec, import a
+locally generated Modelwright Python model, apply scenario selections, and render the discovered
+output tables/headline series. The helpers assume local artifacts are restored under ignored
+``tmp/`` paths.
+"""
 
 from __future__ import annotations
 
@@ -47,7 +53,11 @@ def load_generated_model(
     *,
     module_name: str = "fable_pyculator_generated_fable_2020",
 ) -> ModuleType:
-    """Load an ignored Modelwright-generated Python model from a local path."""
+    """Load an ignored Modelwright-generated Python model from a local path.
+
+    The loaded module must expose the generated model interface expected by
+    :class:`modelwright.wrappers.ModelFacade`, usually a ``calculate`` function.
+    """
 
     path = Path(model_path)
     if not path.exists():
@@ -66,7 +76,7 @@ def build_2020_notebook_spec(
     *,
     workbook_id: str = "fable-c-2020",
 ) -> FableCalculatorSpec:
-    """Build the initial notebook spec from the ignored public 2020 FABLE-C workbook."""
+    """Build the initial notebook spec from the public 2020 FABLE-C workbook structure."""
 
     path = Path(workbook_path)
     return FableCalculatorSpec(
@@ -91,7 +101,11 @@ def run_notebook_loop(
     headline_series_names: Sequence[str] | None = DEFAULT_HEADLINE_SERIES,
     include_figures: bool = True,
 ) -> NotebookLoopResult:
-    """Run a generated model and render selected FABLE notebook artifacts."""
+    """Run a generated model and render selected FABLE notebook artifacts.
+
+    By default, ``output_table_names=None`` and ``headline_series_names=None`` render every declared
+    output table and headline frame from the spec after a single generated-model execution.
+    """
 
     run = run_scenario(generated_model, spec, selections, name=scenario_name)
     selected_output_table_names = _output_table_names(spec, output_table_names)

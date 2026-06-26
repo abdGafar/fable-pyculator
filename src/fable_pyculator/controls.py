@@ -1,4 +1,9 @@
-"""Jupyter widget control surface for FABLE scenario parameters."""
+"""Jupyter widget controls for FABLE scenario inputs.
+
+The widgets in this module are intentionally thin. They collect values for curated scalar parameters
+and FABLE-C selection controls, then hand those values back to
+:class:`~fable_pyculator.spec.FableCalculatorSpec` for conversion into generated-model cell inputs.
+"""
 
 from __future__ import annotations
 
@@ -8,7 +13,11 @@ from fable_pyculator.spec import FableCalculatorSpec, ScenarioParameter
 
 
 class ScenarioControlSurface:
-    """Small ipywidgets-backed control surface for a FABLE scenario spec."""
+    """Small ipywidgets-backed control surface for a FABLE scenario spec.
+
+    The surface displays scalar parameters and mutually exclusive selection controls. It does not yet
+    render editable widgets for the detailed ``SCENARIOS definition`` tables.
+    """
 
     def __init__(self, spec: FableCalculatorSpec) -> None:
         self.spec = spec
@@ -20,12 +29,12 @@ class ScenarioControlSurface:
         self.widget = widgets.VBox(list(self._controls.values()))
 
     def values(self) -> dict[str, object]:
-        """Return current parameter values keyed by scenario parameter name."""
+        """Return current widget values keyed by spec input name."""
 
         return {name: control.value for name, control in self._controls.items()}
 
     def set_values(self, values: dict[str, object]) -> None:
-        """Set current parameter widget values by scenario parameter name."""
+        """Set current widget values by spec input name."""
 
         unknown = sorted(set(values) - set(self._controls))
         if unknown:

@@ -47,6 +47,8 @@ from fable_pyculator.surface import (
     scenario_frame,
 )
 
+__version__ = "0.1.0a1"
+
 __all__ = [
     "FableCalculatorSpec",
     "FABLE_OUTPUT_SURFACE_SHEETS",
@@ -65,6 +67,7 @@ __all__ = [
     "ScenarioRun",
     "SelectionControl",
     "SelectionOption",
+    "__version__",
     "build_2020_notebook_spec",
     "curate_default_headline_series",
     "discover_output_tables",

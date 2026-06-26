@@ -96,3 +96,10 @@ This file records completed project work in chronological order.
   docs/tests/planning evidence.
 - Closed Phase 5 after PR #40 merged to `main` and the post-merge Tests and Docs Pages workflows
   passed.
+- Activated Phase 6 on `feature/p6-alpha-release-readiness`, created parent issue #41 and child
+  issues #42 through #45, and scoped the phase around `v0.1.0a1` alpha release readiness, release
+  workflow symmetry with Modelwright, and expanded API/docs coverage.
+- Completed the Phase 6 implementation by aligning package metadata and release extras with
+  Modelwright, adding release artifact checks and a trusted-publishing workflow, expanding Sphinx API
+  documentation and public docstrings, and documenting the `v0.1.0a1` alpha release runbook and
+  caveats.

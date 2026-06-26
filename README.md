@@ -171,6 +171,10 @@ The Sphinx guide expands this into a full workflow under
 `docs/guides/2020-notebook-workflow.rst`, with validation boundaries recorded in
 `docs/guides/validation-scope.rst`.
 
+`fable-pyculator` is pre-release. The current alpha line is `0.1.0a1`; alpha releases must not be
+described as stable public API compatibility, full editable scenario-definition widgets, production
+readiness, full generated-model equivalence, or arbitrary country-calculator support.
+
 The public API is intentionally small while the FABLE-specific conventions are being discovered from
 real country calculators.
 
@@ -190,11 +194,25 @@ GitHub Pages URL:
 https://ubc-fresh.github.io/fable-pyculator/
 ```
 
+See `docs/guides/release-deployment.rst` for the release and deployment runbook.
+
+## Release Checks
+
+Build and inspect release artifacts locally:
+
+```bash
+scripts/check_release_artifacts.sh
+```
+
+Release checks write build outputs under ignored `tmp/release-checks/`.
+
 ## Default Checks
 
 ```bash
 .venv/bin/python -m ruff check .
 .venv/bin/python -m pytest
 .venv/bin/sphinx-build -b html docs _build/html -W
+.venv/bin/python scripts/verify_docs_theme.py _build/html
+scripts/check_release_artifacts.sh
 sha256sum -c benchmarks/fable-calculator/checksums.sha256
 ```

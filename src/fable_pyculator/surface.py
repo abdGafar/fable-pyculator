@@ -1,4 +1,9 @@
-"""Notebook scenario execution, table rendering, and plotting helpers."""
+"""Notebook scenario execution, table rendering, and plotting helpers.
+
+Rendering helpers convert FABLE Pyculator declarations into pandas DataFrames and matplotlib figures.
+They operate on generated-model values already returned by Modelwright and keep workbook provenance
+in ``DataFrame.attrs`` wherever practical.
+"""
 
 from __future__ import annotations
 
@@ -96,7 +101,12 @@ def output_table_frame(
     *,
     include_context_columns: bool = True,
 ) -> Any:
-    """Render one declared FABLE output table from a scenario run."""
+    """Render one declared FABLE output table from a scenario run.
+
+    ``column_flavour_tags`` accepts exact tags such as ``OUTPUT-8``, family aliases such as
+    ``DATA``, and trailing-star patterns such as ``OUTPUT-*``. Context columns tagged ``DIRECT`` or
+    ``AUX`` are retained by default when filtering.
+    """
 
     table = _output_table(run.spec, table_name)
     return _table_frame(
@@ -148,7 +158,11 @@ def scenario_definition_tables_for_location(
     *,
     include_family: bool = True,
 ) -> dict[str, Any]:
-    """Render scenario definition tables associated with a workbook scenario location."""
+    """Render scenario definition tables associated with a workbook scenario location.
+
+    Passing ``S.3`` with ``include_family=True`` returns tables marked ``S.3.A``, ``S.3.B``, and so
+    on. Passing an exact marker such as ``S.3.C`` returns only tables with that marker.
+    """
 
     requested_location = _canonical_scenario_definition_location(location)
     return {
