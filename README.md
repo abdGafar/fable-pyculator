@@ -37,6 +37,20 @@ https://github.com/UBC-FRESH/fable-pyculator.git
 
 ## Install For Development
 
+Recommended VSCode/Jupyter setup from the `fable-pyculator` repo root:
+
+```bash
+scripts/bootstrap_dev_env.sh
+```
+
+Then select this interpreter as the VSCode notebook kernel:
+
+```text
+.venv/bin/python
+```
+
+Manual equivalent:
+
 ```bash
 python -m venv .venv
 .venv/bin/python -m pip install --upgrade pip
@@ -125,6 +139,10 @@ Tracked notebook example:
 ```text
 examples/notebooks/fable-pyculator-2020-loop.ipynb
 ```
+
+In VSCode, point the notebook kernel at the `.venv` created in the `fable-pyculator` repo root.
+The notebook setup cell prints the active environment prefix and warns if the selected kernel does
+not appear to be that repo-local `.venv`.
 
 The Sphinx guide expands this into a full workflow under
 `docs/guides/2020-notebook-workflow.rst`, with validation boundaries recorded in

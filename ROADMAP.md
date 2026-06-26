@@ -7,9 +7,12 @@ Modelwright-generated Python models while preserving Modelwright as the generic 
 
 ## Current Next Steps
 
-- Open the Phase 1 PR after P1.4 is committed, pushed, and issue #10 is closed.
-- Treat the phase close-out PR as the docs deployment gate: Sphinx must build on the PR, and the
-  merge to `main` must trigger the GitHub Pages deployment workflow.
+- Post-Phase-1 maintenance issue #13 adds VSCode `.venv` bootstrap and notebook artifact-path
+  handling for test users.
+- Phase 1 is closed. Choose and map the next roadmap phase before starting the next non-trivial
+  implementation lane.
+- Keep Sphinx docs deployment as a phase closeout gate: every phase PR must pass the docs build, and
+  the merge to `main` must trigger the GitHub Pages deployment workflow.
 
 ## Phase 0: Governance Bootstrap
 
@@ -86,7 +89,7 @@ GitHub parent issue: #6.
 
 Active branch: `feature/p1-fable-c-notebook-wrapper-maturation`.
 
-Status: active.
+Status: complete.
 
 Goal: turn the bootstrap selection-control and output-table discoveries into a coherent 2020 FABLE-C
 notebook workflow that can drive a generated Modelwright model, render canonical outputs, and expose
@@ -156,3 +159,11 @@ Verification evidence:
 - `.venv/bin/python -m pytest tests/test_notebook.py` passed with 4 tests.
 - `.venv/bin/python -m pytest tests/test_examples.py` passed with 1 test.
 - `.venv/bin/python scripts/verify_docs_theme.py _build/html` passed.
+
+Closeout evidence:
+
+- Phase 1 parent issue #6 is closed.
+- Phase 1 PR #11 merged to `main` with merge commit `c85378a`.
+- RTD docs alignment PR #12 merged to `main` with merge commit `24a6f24`.
+- Post-merge `Docs Pages` workflow built, verified the Read the Docs theme artifact, and deployed to
+  `https://ubc-fresh.github.io/fable-pyculator/`.
