@@ -1,4 +1,4 @@
-name: Tests
+name: Test
 
 on:
   pull_request:
@@ -7,20 +7,64 @@ on:
       - main
 
 jobs:
-  test:
+  quality:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Install
+
+      - name: Install package with quality dependencies
+        run: python -m pip install -e ".[quality]"
+
+      - name: Run lint checks
+        run: python -m ruff check .
+
+  pytest:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install package with test dependencies
+        run: python -m pip install -e ".[test,notebook,docs]"
+
+      - name: Run tests
+        run: python -m pytest
+
+      - name: Build docs
+        run: sphinx-build -b html docs _build/html -W
+
+  release-artifacts:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install release dependencies
         run: |
           python -m pip install --upgrade pip
-          python -m pip install -e '.[dev,notebook,docs]'
-      - name: Ruff
-        run: python -m ruff check .
-      - name: Pytest
-        run: python -m pytest
-      - name: Docs
-        run: sphinx-build -b html docs _build/html -W
+          python -m pip install -e ".[release]"
+
+      - name: Build and inspect release artifacts
+        env:
+          PYTHON: python
+          RELEASE_CHECK_DIR: tmp/release-checks/ci
+        run: scripts/check_release_artifacts.sh

@@ -1,4 +1,9 @@
-"""Heuristics for locating FABLE Calculator scenario controls."""
+"""Workbook discovery helpers for public FABLE-C workbook conventions.
+
+Discovery functions read workbook structure and return typed notebook declarations. They are
+workbook-version informed, not a generic Excel conversion layer; generic extraction and formula
+translation remain Modelwright responsibilities.
+"""
 
 from __future__ import annotations
 
@@ -88,7 +93,12 @@ def discover_selection_controls(
     *,
     sheet_name: str = "SCENARIOS selection",
 ) -> list[SelectionControl]:
-    """Discover mutually-exclusive ``x`` selection tables on the FABLE scenario sheet."""
+    """Discover mutually exclusive ``x`` selection tables on ``SCENARIOS selection``.
+
+    The public 2020 and 2021 FABLE-C workbooks expose 16 high-level scenario controls with this
+    structure. The first table column is the marker column; the second column contains the option
+    value passed to :meth:`fable_pyculator.SelectionControl.input_mapping`.
+    """
 
     workbook = load_workbook(workbook_path, data_only=False, read_only=False)
     worksheet = workbook[sheet_name]
@@ -137,7 +147,12 @@ def discover_scenario_definition_tables(
     *,
     sheet_name: str = "SCENARIOS definition",
 ) -> list[ScenarioDefinitionTable]:
-    """Discover native Excel tables on the FABLE scenario definition sheet."""
+    """Discover native Excel tables on ``SCENARIOS definition``.
+
+    Returned tables preserve headers, row labels, cell references, current workbook values,
+    role/source markers, and scenario-definition location markers. They are intended for inspection
+    and later curation; they are not yet automatically exposed as editable widgets.
+    """
 
     workbook = load_workbook(workbook_path, data_only=False, read_only=False)
     if sheet_name not in workbook.sheetnames:
@@ -203,7 +218,11 @@ def discover_output_tables(
     *,
     sheet_names: Iterable[str] = FABLE_OUTPUT_SURFACE_SHEETS,
 ) -> list[OutputTable]:
-    """Discover Excel tables on the canonical FABLE output data sheets."""
+    """Discover Excel tables on the canonical FABLE output data sheets.
+
+    Output tables preserve workbook cell references and optional output-column flavour tags. The
+    flavour metadata powers output DataFrame filtering in :func:`fable_pyculator.output_table_frame`.
+    """
 
     workbook = load_workbook(workbook_path, data_only=False, read_only=False)
     tables: list[OutputTable] = []

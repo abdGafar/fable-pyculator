@@ -1,4 +1,10 @@
-"""Typed FABLE Pyculator notebook declarations."""
+"""Typed notebook declarations for FABLE Calculator wrapper specs.
+
+This module is deliberately declarative. The records here describe the workbook-backed surfaces that
+FABLE Pyculator can expose in notebooks: high-level scenario selections, scenario-definition tables,
+canonical output tables, and curated headline series. They do not execute Excel formulas and they do
+not claim that every workbook cell has been converted into a stable public API.
+"""
 
 from __future__ import annotations
 
@@ -24,7 +30,12 @@ FABLE_OUTPUT_SURFACE_SHEETS = (
 
 @dataclass(frozen=True)
 class ScenarioParameter:
-    """One FABLE Calculator input parameter exposed to a notebook scenario."""
+    """One scalar FABLE Calculator input exposed as a notebook scenario value.
+
+    A parameter maps a friendly Python name to a generated-model cell reference. This record is for
+    curated scalar controls; discovered FABLE-C selection tables should normally use
+    :class:`SelectionControl` instead.
+    """
 
     name: str
     label: str
@@ -43,7 +54,7 @@ class ScenarioParameter:
 
 @dataclass(frozen=True)
 class OutputIndicator:
-    """One FABLE Calculator output indicator rendered from a generated model."""
+    """One scalar output cell rendered from a generated Modelwright model."""
 
     name: str
     label: str
@@ -58,7 +69,12 @@ class OutputIndicator:
 
 @dataclass(frozen=True)
 class OutputTable:
-    """One rectangular table on a canonical FABLE output sheet."""
+    """One rectangular output table on a canonical FABLE output sheet.
+
+    ``column_flavour_tags`` stores output-sheet flavour metadata such as ``DIRECT``, ``DATA-5``, or
+    ``OUTPUT-8``. That vocabulary belongs to output tables only; scenario-definition input tables use
+    ``column_role_tags`` instead.
+    """
 
     name: str
     sheet: str
@@ -91,7 +107,13 @@ class OutputTable:
 
 @dataclass(frozen=True)
 class ScenarioDefinitionTable:
-    """One rectangular table on the FABLE scenario definition sheet."""
+    """One native table on the FABLE ``SCENARIOS definition`` sheet.
+
+    These records make definition tables inspectable in notebooks. ``column_role_tags`` preserves
+    workbook role/source markers such as ``DIRECT``, ``SCEN``, ``CALC``, and ``DATA-1``. The
+    ``scenario_locations`` field stores workbook markers such as ``S.3.C`` that help users browse
+    related definition tables. The table is not yet an editable widget contract.
+    """
 
     name: str
     sheet: str
@@ -183,7 +205,12 @@ class HeadlinePoint:
 
 @dataclass(frozen=True)
 class HeadlineSeries:
-    """One curated notebook headline series built from FABLE output tables."""
+    """One curated notebook headline series built from FABLE output tables.
+
+    A series is intentionally narrower than a full output table. It describes the source table,
+    source cell references, units, and aggregation rule needed to render a compact analyst-facing
+    time series.
+    """
 
     name: str
     label: str
@@ -218,7 +245,11 @@ class SelectionOption:
 
 @dataclass(frozen=True)
 class SelectionControl:
-    """One mutually-exclusive FABLE scenario selection table."""
+    """One mutually exclusive FABLE scenario selection table.
+
+    FABLE-C selection tables use a first-column ``x`` marker. Selecting one option means placing
+    ``x`` in that option's marker cell and clearing all other marker cells in the same table.
+    """
 
     name: str
     label: str
@@ -246,7 +277,12 @@ class SelectionControl:
         return self.options[0].value if self.options else None
 
     def input_mapping(self, selected_value: object) -> dict[str, object]:
-        """Return generated-model overrides that place one ``x`` in this table."""
+        """Return generated-model overrides that place one ``x`` in this table.
+
+        The returned mapping is keyed by normalized full cell references. It clears unselected marker
+        cells with ``None`` because Modelwright scenarios accept explicit cell inputs, not workbook UI
+        gestures.
+        """
 
         selected = str(selected_value)
         values = {option.value for option in self.options}
@@ -260,7 +296,12 @@ class SelectionControl:
 
 @dataclass(frozen=True)
 class FableCalculatorSpec:
-    """Notebook-facing declaration of FABLE scenario parameters and outputs."""
+    """Notebook-facing declaration of FABLE scenario inputs and outputs.
+
+    The spec is the central object passed to FABLE Pyculator control, execution, and rendering
+    helpers. It keeps input declarations, discovered definition-table metadata, output declarations,
+    and workbook provenance together while preserving their distinct semantics.
+    """
 
     parameters: tuple[ScenarioParameter, ...] | list[ScenarioParameter] = field(default_factory=tuple)
     selection_controls: tuple[SelectionControl, ...] | list[SelectionControl] = field(default_factory=tuple)
@@ -297,7 +338,11 @@ class FableCalculatorSpec:
         object.__setattr__(self, "headline_series", headline_series)
 
     def input_mapping(self, values: dict[str, object]) -> dict[str, object]:
-        """Convert scenario values keyed by parameter name to generated-model cell inputs."""
+        """Convert friendly scenario values to generated-model cell inputs.
+
+        Values may reference curated scalar parameters or discovered selection controls by name.
+        Unknown names are rejected so notebook typos do not silently produce partial scenarios.
+        """
 
         parameters_by_name = {parameter.name: parameter for parameter in self.parameters}
         controls_by_name = {control.name: control for control in self.selection_controls}

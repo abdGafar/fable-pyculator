@@ -7,8 +7,8 @@ Modelwright-generated Python models while preserving Modelwright as the generic 
 
 ## Current Next Steps
 
-- Phase 5 issue #35 corrects `SCENARIOS definition` metadata semantics and maps scenario-selection
-  locations to the relevant definition tables before richer editing widgets are attempted.
+- Phase 6 issue #41 has implementation and verification evidence for a narrow `v0.1.0a1` alpha
+  release; close the phase through the PR merge and post-merge docs deployment checks.
 - Keep Sphinx docs deployment as a phase closeout gate: every phase PR must pass the docs build, and
   the merge to `main` must trigger the GitHub Pages deployment workflow.
 
@@ -447,3 +447,81 @@ Closeout evidence:
 - Phase 5 parent issue #35 is closed.
 - Phase 5 PR #40 merged to `main` with merge commit `2dfd65e`.
 - Post-merge Tests and Docs Pages workflows passed, and GitHub Pages deployed.
+
+## Phase 6: Alpha Release Readiness
+
+GitHub parent issue: #41.
+
+Active branch: `feature/p6-alpha-release-readiness`.
+
+Status: active.
+
+Goal: prepare FABLE Pyculator for a narrow `v0.1.0a1` alpha release by mirroring Modelwright's
+package-release workflow and tightening documentation/API coverage.
+
+- [x] P6.1 Align package metadata and release artifact checks. Child issue: #42.
+  - Status: complete.
+  - [x] Bump package version to `0.1.0a1`.
+  - [x] Add Modelwright-style `quality`, `test`, and `release` dependency extras.
+  - [x] Add `__version__` to the package root.
+  - [x] Add `scripts/check_release_artifacts.sh` adapted for FABLE Pyculator.
+  - [x] Add CI release-artifact checks.
+- [x] P6.2 Add GitHub release publication workflow. Child issue: #43.
+  - Status: complete.
+  - [x] Add Modelwright-style `.github/workflows/release.yml`.
+  - [x] Use trusted-publishing environments for TestPyPI/PyPI.
+  - [x] Upload release artifacts from the build job.
+  - [x] Document tag and workflow dispatch behavior.
+- [x] P6.3 Expand API documentation and public docstrings. Child issue: #44.
+  - Status: complete.
+  - [x] Expand Sphinx API docs to module-level coverage.
+  - [x] Review public source modules for concise but useful docstrings.
+  - [x] Keep alpha boundaries clear in docs.
+  - [x] Verify docs build with warnings as errors.
+- [x] P6.4 Document alpha release runbook and verify release readiness. Child issue: #45.
+  - Status: complete.
+  - [x] Add release/deployment Sphinx guide.
+  - [x] Update README, roadmap, and changelog.
+  - [x] Run full checks plus release artifact checks.
+  - [x] Record release-readiness evidence and remaining alpha caveats.
+
+Acceptance boundary:
+
+- May claim FABLE Pyculator has Modelwright-aligned release artifact checks and release workflow
+  scaffolding for a `0.1.0a1` alpha.
+- May claim the alpha package installs and exposes documented notebook-wrapper APIs.
+- Must not claim stable public API compatibility, full editable scenario-definition widgets,
+  production readiness, full generated-model equivalence, or arbitrary country-calculator support.
+
+Implementation evidence:
+
+- Bumped the package release target to `0.1.0a1` in `pyproject.toml` and
+  `fable_pyculator.__version__`.
+- Added Modelwright-style `quality`, `test`, and `release` optional dependency extras.
+- Added `scripts/check_release_artifacts.sh` to build sdist/wheel artifacts, run `twine check`,
+  inspect package contents for private workbook/generated-model leakage, and smoke-test a clean wheel
+  install.
+- Split CI into quality, pytest/docs, and release-artifact jobs.
+- Added `.github/workflows/release.yml` with artifact upload and trusted-publishing jobs for
+  TestPyPI/PyPI.
+- Expanded Sphinx API docs to cover the package facade and public modules.
+- Expanded public module, dataclass, and helper docstrings across `spec`, `discovery`, `controls`,
+  `notebook`, and `surface`.
+- Added `docs/guides/release-deployment.rst` with local checks, artifact gates, TestPyPI/PyPI
+  publication steps, GitHub Pages closeout expectations, rollback notes, and alpha caveats.
+- Updated README, bootstrap instructions, roadmap, and changelog for the release-readiness workflow.
+
+Verification evidence:
+
+- `.venv/bin/python -m ruff check .` passed.
+- `.venv/bin/python -m pytest` passed with 31 tests and 9 workbook-backed skips.
+- `.venv/bin/sphinx-build -b html docs _build/html -W` passed.
+- `.venv/bin/python scripts/verify_docs_theme.py _build/html` passed.
+- `scripts/check_release_artifacts.sh` passed for `fable-pyculator 0.1.0a1`, including clean wheel
+  install and import smoke checks.
+- `sha256sum -c benchmarks/fable-calculator/checksums.sha256` passed for the ignored local 2019,
+  2020, and 2021 workbook artifacts.
+
+Closeout evidence:
+
+- Pending.
