@@ -12,12 +12,13 @@ The current alpha target is ``0.1.0a1`` with Git tag ``v0.1.0a1``.
 
 This alpha may claim an early FABLE-C notebook wrapper that can discover the public 2020/2021
 ``SCENARIOS selection`` controls, inspect ``SCENARIOS definition`` tables, render canonical output
-tables with output-column flavour filtering, render curated FOOD/LAND/GHG/WATER headline frames, and
-run a locally restored Modelwright-generated 2020 model from ignored ``tmp/`` artifacts.
+tables with output-column flavour filtering, render curated FOOD/LAND/GHG/WATER headline frames, run
+a locally restored Modelwright-generated 2020 model from ignored ``tmp/`` artifacts, and restore a
+validated compressed 2021 generated model from ``examples/fable_2021/``.
 
 It must not claim stable public API compatibility, full editable scenario-definition widgets,
-production readiness, full generated-model equivalence inside this repository, or arbitrary
-country-calculator support.
+production readiness, arbitrary country-calculator support, or generated-model equivalence beyond
+the recorded public 2020/2021 FABLE-C benchmark evidence.
 
 Local Release Checks
 --------------------
@@ -44,9 +45,9 @@ Build and inspect package artifacts:
    scripts/check_release_artifacts.sh
 
 The artifact checker writes outputs under ignored ``tmp/release-checks/``. It builds an sdist and
-wheel, runs ``twine check``, inspects artifact contents for source workbooks or generated models,
-installs the wheel into a clean virtual environment, imports FABLE Pyculator, and verifies the
-published package version.
+wheel, runs ``twine check``, inspects artifact contents for source workbooks, raw generated models,
+or unapproved generated artifacts, installs the wheel into a clean virtual environment, imports FABLE
+Pyculator, and verifies the published package version.
 
 Documentation Deployment Gate
 -----------------------------
@@ -108,5 +109,11 @@ Use one of these responses:
 Private Data Rules
 ------------------
 
-Release artifacts must not include source workbooks, generated Python clones, raw validation reports,
-local logs, credentials, or ignored ``tmp/`` material.
+Release artifacts must not include source workbooks, decompressed generated Python clones, raw
+validation reports, local logs, credentials, or ignored ``tmp/`` material.
+
+The only approved generated-model exception in the public repository is the compressed 2021 artifact:
+
+.. code-block:: text
+
+   examples/fable_2021/generated_fable_2021_model.py.xz

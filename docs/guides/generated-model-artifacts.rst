@@ -27,8 +27,16 @@ Keep generated models under ignored ``tmp/`` paths:
      - ``tmp/generated-models/fable-2021/generated_fable_2021_model.py``
 
 The 2020 example notebook may materialize the compressed 2020 generated model from a sibling
-Modelwright checkout. The 2021 notebook does not do that, because a 2020 generated model is not a
-valid substitute for a 2021 generated model.
+Modelwright checkout. The 2021 example notebook materializes the validated compressed 2021 generated
+model tracked in this repository:
+
+.. code-block:: text
+
+   examples/fable_2021/generated_fable_2021_model.py.xz
+
+That archive is the only tracked generated-model exception in this repository. Source workbooks,
+decompressed generated models, raw generation JSON files, and validation reports still belong under
+ignored ``tmp/`` paths.
 
 Spec Discovery Versus Model Generation
 --------------------------------------
@@ -71,16 +79,25 @@ Modelwright's low-level generation command expects explicit JSON artifacts:
 - ``constants.json`` contains literal input values or cached constants needed by the generated model.
 
 Those files are Modelwright generation inputs. FABLE Pyculator does not currently expose an API that
-creates them from a FABLE workbook, and it should not silently invent them. A future Modelwright or
-project-specific workflow may materialize a validated 2021 generated model and place it under the
-ignored 2021 path above.
+creates them from a FABLE workbook, and it should not silently invent them. The 2021 generated model
+published here was created by Modelwright during Phase 8 and then compressed for notebook users.
 
 Current Validation Boundary
 ---------------------------
 
 The 2020 generated model tracked in the sibling Modelwright repository has Modelwright validation
-evidence. The 2021 FABLE Pyculator helpers currently validate wrapper structure and artifact wiring,
-not generated-model output equivalence.
+evidence. Phase 8 added matching FABLE Pyculator evidence for the public 2021 FABLE-C generated
+model artifact:
 
-Until a matching 2021 generated model has been produced and validated, 2021 results should be treated
-as a wrapper integration target rather than an equivalence claim.
+- extracted sheets: 62;
+- extracted cells: 413,776;
+- formula cells: 297,002;
+- translated formula cells: 297,002;
+- comparable cached outputs: 281,922;
+- generated-output matches: 281,922;
+- mismatches: 0;
+- non-comparable cached blank formula outputs: 15,080.
+
+The 2021 claim is limited to the public 2021 FABLE-C workbook and the compressed generated model
+artifact in ``examples/fable_2021/``. It is not a claim about arbitrary country calculators,
+production readiness, or FABLE-P Canada equivalence.

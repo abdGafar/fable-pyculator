@@ -7,8 +7,10 @@ Modelwright-generated Python models while preserving Modelwright as the generic 
 
 ## Current Next Steps
 
-- Phase 7 is closed with explicit 2021 notebook wiring, generated-model artifact guidance, and
-  Modelwright follow-up issue #201 for contract materialization documentation/tooling.
+- Phase 8 is active on `feature/p8-validated-2021-generated-model`: validate and publish the 2021
+  FABLE-C generated Python model only if it reaches the same zero-mismatch comparable-output
+  standard used for the 2020 benchmark. Clean Phase 8 validation has passed; docs, notebook, tests,
+  PR/merge, and deployment closeout remain.
 - `v0.1.0a1` has been published to TestPyPI and PyPI; future release work should target a new
   version.
 - Keep Sphinx docs deployment as a phase closeout gate: every phase PR must pass the docs build, and
@@ -628,3 +630,101 @@ Closeout evidence:
   jobs.
 - Post-merge `Docs Pages` workflow passed on `main`, including Sphinx build, Read the Docs theme
   artifact verification, artifact upload, and GitHub Pages deployment.
+
+## Phase 8: Validated 2021 Generated Model Publication
+
+GitHub parent issue: #54.
+
+Active branch: `feature/p8-validated-2021-generated-model`.
+
+Status: active.
+
+Goal: add the public 2021 FABLE-C generated Python model to `fable-pyculator` with the same evidence
+discipline used for the 2020 Modelwright benchmark: generate from the public 2021 workbook, validate
+against cached workbook outputs, publish only an approved compressed generated-model artifact, and
+document the exact validation boundary.
+
+- [ ] P8.1 Define 2021 validation contract and output universe. Child issue: #59.
+  - Status: complete.
+  - [x] Derive the 2021 output universe from the public 2021 workbook using the same comparable-output
+        contract as the 2020 benchmark.
+  - [x] Record comparable output counts and any non-comparable cached blanks separately.
+  - [x] Keep raw workbook extracts, output refs, generated JSON files, logs, and validation reports
+        under ignored `tmp/`.
+- [ ] P8.2 Generate and validate the 2021 Modelwright Python model. Child issue: #58.
+  - Status: complete.
+  - [x] Run Modelwright extraction, contract inference, code generation, execution, and cached-output
+        validation from the 2021 workbook.
+  - [x] Require status `pass`, zero mismatches, and match count equal to comparable output count before
+        making any 2021 equivalence claim.
+  - [x] If validation fails, record blocker taxonomy and do not publish an equivalence artifact.
+- [ ] P8.3 Publish compressed 2021 generated-model artifact. Child issue: #55.
+  - Status: complete.
+  - [x] Track only `examples/fable_2021/generated_fable_2021_model.py.xz` as the approved compact
+        generated-model artifact.
+  - [x] Add `examples/fable_2021/README.md` with source workbook checksum, validation counts,
+        generation command outline, and artifact boundary.
+  - [x] Keep source workbook, decompressed `.py`, generated JSON inputs, logs, and raw validation
+        outputs ignored.
+- [ ] P8.4 Update 2021 notebook, docs, and Basecamp guidance. Child issue: #57.
+  - Status: complete.
+  - [x] Update the 2021 notebook to materialize the compressed 2021 generated model into the ignored
+        `tmp/generated-models/fable-2021/` path.
+  - [x] Update README, generated-model artifact docs, validation-scope docs, release docs, and
+        notebook docs with the exact Phase 8 evidence.
+  - [x] Update the Basecamp follow-up draft to point users to the published 2021 artifact and its
+        validation boundary.
+- [ ] P8.5 Verify, merge, deploy docs, and close phase. Child issue: #56.
+  - Status: active.
+  - [x] Add tests for the compressed 2021 artifact, notebook artifact references, and release artifact
+        allowlisting.
+  - [x] Run lint, tests, opt-in workbook tests, docs, theme verification, checksum verification, release
+        artifact checks, and `git diff --check`.
+  - [ ] Open and merge the Phase 8 PR only after CI passes.
+  - [ ] Confirm post-merge `Test` and `Docs Pages` workflows pass and the deployed docs show the
+        updated 2021 validation claim before closing the parent issue.
+
+Acceptance boundary:
+
+- May claim 2021 generated-model equivalence only if the 2021 generated model validates with
+  `0` comparable-output mismatches against the 2021 source workbook.
+- Must record comparable output count, match count, mismatch count, and non-comparable cached blanks
+  before publishing a validation claim.
+- Must not track the 2021 source workbook, raw validation report, decompressed generated model,
+  generated JSON inputs, logs, or ignored `tmp/` artifacts.
+- Must not claim arbitrary country-calculator support, production readiness, or full FABLE-P model
+  equivalence.
+
+Implementation evidence:
+
+- Added `examples/fable_2021/generated_fable_2021_model.py.xz` as the approved compressed generated
+  model artifact.
+- Added `examples/fable_2021/README.md` and `planning/phase-8-2021-validation-summary.md` with
+  sanitized validation evidence and artifact boundaries.
+- Updated the 2021 notebook to materialize the compressed generated model into
+  `tmp/generated-models/fable-2021/generated_fable_2021_model.py`.
+- Updated README and Sphinx docs to replace the old 2021 wiring-only caveat with the Phase 8
+  validation evidence.
+- Hardened release artifact checks so only the approved compressed 2021 generated model is allowed.
+- Modelwright PR #204 merged to `main` at `c3734d3`, closing issue #203 for the generic generated
+  `VLOOKUP` `#N/A` runtime semantic fix uncovered by the 2021 validation run.
+
+Verification evidence:
+
+- Clean Phase 8 validation summary: 281,922 comparable outputs, 281,922 matches, 0 mismatches, 15,080
+  non-comparable cached blank formula outputs, zero graph diagnostics, and zero translation
+  diagnostics.
+- Modelwright targeted checks for PR #204 passed before merge: `.venv/bin/python -m ruff check .` and
+  `.venv/bin/python -m pytest tests/test_python_generation.py tests/test_generated_execution.py -q`.
+- `.venv/bin/python -m ruff check .` passed.
+- `.venv/bin/python -m pytest` passed with 37 tests and 9 workbook-backed skips.
+- `FABLE_PYCULATOR_RUN_WORKBOOK_TESTS=1 .venv/bin/python -m pytest -q tests/test_fable_workbook_output_flavour_tags.py tests/test_fable_workbook_selection_controls.py tests/test_fable_workbook_scenario_definition_tables.py` passed with 8 tests.
+- `.venv/bin/sphinx-build -b html docs _build/html -W` passed.
+- `.venv/bin/python scripts/verify_docs_theme.py _build/html` passed.
+- `sha256sum -c benchmarks/fable-calculator/checksums.sha256` passed.
+- `scripts/check_release_artifacts.sh` passed.
+- `git diff --check` passed.
+
+Closeout evidence:
+
+- Pending.

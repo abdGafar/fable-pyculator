@@ -19,6 +19,8 @@ The current package checks cover:
 - import and execution of a generated-model module from an ignored local path;
 - expansion of friendly selection values into marker-cell overrides;
 - rendering of selected output tables, headline DataFrames, and headline figures.
+- publication of a compressed, validation-backed 2021 generated-model artifact under
+  ``examples/fable_2021/``.
 
 Default verification commands:
 
@@ -54,25 +56,39 @@ FABLE Pyculator may use that generated model as an ignored local artifact, but t
 restate that evidence as a new independent validation run until a FABLE Pyculator validation phase
 records its own execution evidence.
 
-2021 Follow-Up Scope
---------------------
+FABLE Pyculator 2021 Evidence
+-----------------------------
 
-The 2021 workbook is currently a generalizability check for wrapper structure, not a validated
-generated-model benchmark. The known near-term questions are:
+Phase 8 generated and validated a matching 2021 Modelwright Python model for the public 2021
+FABLE-C workbook, then tracked only the compressed generated artifact under
+``examples/fable_2021/generated_fable_2021_model.py.xz``.
 
-- Has a matching 2021 Modelwright-generated Python model been produced and placed under
-  ``tmp/generated-models/fable-2021/``?
-- Do the curated headline table names and columns remain stable across 2021?
+Validation pass evidence:
+
+- 62 sheets and 413,776 extracted cells;
+- 297,002 formula cells translated with zero translation diagnostics;
+- 281,922 comparable cached outputs;
+- 240,124 numeric comparable outputs;
+- 41,798 text comparable outputs;
+- 281,922 generated-output matches;
+- 0 mismatches;
+- 15,080 non-comparable cached blank formula outputs recorded as boundary evidence.
+
+This run also uncovered a generic Modelwright generated-runtime semantic gap: bare ``VLOOKUP`` misses
+needed to propagate as ``#N/A`` values while ``IFNA`` and ``IFERROR`` still returned fallbacks. The
+validated 2021 artifact was generated after that upstream Modelwright fix.
+
+Remaining follow-up questions:
+
 - Do country-specific variants preserve the S.1 through S.16 selection-control pattern?
-- Which defaults differ, beyond the observed ``Affor_scen`` default?
-- Does the generated-model loop need version-specific spec curation?
+- Which defaults differ across country calculators and later workbook releases?
 - Which output tables or headline series should become stable public API, and which should remain
   benchmark-specific examples?
 
 Claim Boundary
 --------------
 
-Current evidence supports an early 2020 FABLE-C notebook wrapper workflow for inspected public
-workbooks and 2021 wrapper-structure discovery. It does not support claims of 2021 generated-model
-output equivalence, production readiness, arbitrary country-calculator support, or full
-generated-model equivalence inside this repository.
+Current evidence supports early notebook wrapper workflows for the inspected public 2020 and 2021
+FABLE-C workbooks, plus full comparable-output validation for the tracked 2021 compressed generated
+model artifact. It does not support claims of production readiness, arbitrary country-calculator
+support, or FABLE-P Canada equivalence.

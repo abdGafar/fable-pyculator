@@ -123,8 +123,13 @@ The 2021 convenience loop uses separate ignored local artifacts:
 - ``tmp/private-workbooks/2021_Open_FABLECalculator.xlsx``
 - ``tmp/generated-models/fable-2021/generated_fable_2021_model.py``
 
-Use ``run_2021_notebook_loop`` only after a matching 2021 generated model has been restored or
-created locally:
+The notebook can restore the matching 2021 generated model from the tracked compressed archive:
+
+.. code-block:: text
+
+   examples/fable_2021/generated_fable_2021_model.py.xz
+
+Use ``run_2021_notebook_loop`` after the source workbook is restored locally:
 
 - :download:`fable-pyculator-2021-loop.ipynb <../../examples/notebooks/fable-pyculator-2021-loop.ipynb>`
 
@@ -137,8 +142,9 @@ created locally:
        include_figures=False,
    )
 
-The 2021 helper intentionally does not fall back to the compressed 2020 generated model. For the
-generated-model artifact boundary, see :doc:`generated-model-artifacts`.
+The 2021 helper intentionally does not fall back to the compressed 2020 generated model. Phase 8
+validated the tracked 2021 artifact with 281,922 comparable outputs, 281,922 matches, and 0
+mismatches. For the generated-model artifact boundary, see :doc:`generated-model-artifacts`.
 
 Current Scope
 -------------
@@ -147,5 +153,6 @@ The current implementation discovers high-level selection tables and renders nat
 ``SCENARIOS definition`` tables for inspection. The definition tables are not yet exposed as a full
 editable widget surface. Output table discovery maps Excel table cells into DataFrame surfaces;
 headline outputs are currently curated for FOOD, LAND, GHG, and WATER. The first curation is still
-benchmark-oriented. The 2020 notebook loop can run against an ignored generated model artifact, but
-full generated-model equivalence remains a validation-phase claim rather than a wrapper API claim.
+benchmark-oriented. Generated-model equivalence remains a validation-phase claim rather than a
+wrapper API claim, and is currently limited to the recorded public 2020/2021 FABLE-C benchmark
+evidence.

@@ -35,15 +35,20 @@ echo "[release-check] running twine metadata check"
 "$PYTHON_BIN" -m twine check "$DIST_DIR"/*
 
 echo "[release-check] inspecting artifact contents"
-"$PYTHON_BIN" - "$DIST_DIR" <<'PY'
+"$PYTHON_BIN" - "$DIST_DIR" "$ROOT_DIR" <<'PY'
 from __future__ import annotations
 
+import subprocess
 import sys
 import tarfile
 import zipfile
 from pathlib import Path
 
 dist_dir = Path(sys.argv[1])
+root_dir = Path(sys.argv[2])
+approved_generated_archives = {
+    Path("examples/fable_2021/generated_fable_2021_model.py.xz"),
+}
 forbidden_parts = {
     ".venv",
     "_build",
@@ -71,15 +76,36 @@ def names_for(path: Path) -> list[str]:
 
 
 errors: list[str] = []
+
+
+def inspect_name(name: str, *, source: str) -> None:
+    path = Path(name)
+    parts = set(path.parts)
+    suffix = path.suffix.lower()
+    if parts & forbidden_parts:
+        errors.append(f"{source}: forbidden path: {name}")
+    if suffix in forbidden_suffixes:
+        errors.append(f"{source}: workbook file: {name}")
+    if path.name.startswith("generated_fable_") and path.suffix == ".py":
+        errors.append(f"{source}: decompressed generated model: {name}")
+    if path.name.startswith("generated_fable_") and path.suffix == ".xz":
+        normalized_parts = path.parts[1:] if path.parts and path.parts[0].startswith("fable_pyculator-") else path.parts
+        normalized = Path(*normalized_parts)
+        if normalized not in approved_generated_archives:
+            errors.append(f"{source}: unapproved generated model archive: {name}")
+
+
+tracked_names = subprocess.check_output(
+    ["git", "-C", str(root_dir), "ls-files"],
+    text=True,
+).splitlines()
+for name in tracked_names:
+    inspect_name(name, source="git")
+
 for artifact in sorted(dist_dir.iterdir()):
     names = names_for(artifact)
     for name in names:
-        parts = set(Path(name).parts)
-        suffix = Path(name).suffix.lower()
-        if parts & forbidden_parts:
-            errors.append(f"{artifact.name}: forbidden path in artifact: {name}")
-        if suffix in forbidden_suffixes:
-            errors.append(f"{artifact.name}: workbook file in artifact: {name}")
+        inspect_name(name, source=artifact.name)
     print(f"[release-check] inspected {artifact.name}: {len(names)} entries")
 
 if errors:
