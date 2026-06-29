@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import lzma
 from pathlib import Path
 
 
@@ -57,6 +58,8 @@ def test_fable_pyculator_2021_notebook_uses_2021_artifact_paths_only() -> None:
     assert "DEFAULT_2021_GENERATED_MODEL_PATH" in code_source
     assert "build_2021_notebook_spec" in code_source
     assert "run_2021_notebook_loop" in code_source
+    assert "examples\" / \"fable_2021\" / \"generated_fable_2021_model.py.xz" in code_source
+    assert "lzma.open" in code_source
     assert "tmp/generated-models/fable-2021/generated_fable_2021_model.py" in "".join(
         "".join(cell["source"])
         for cell in payload["cells"]
@@ -64,3 +67,14 @@ def test_fable_pyculator_2021_notebook_uses_2021_artifact_paths_only() -> None:
     assert "modelwright_archive" not in code_source
     assert "generated_fable_2020_model" not in code_source
     assert "run_2020_notebook_loop" not in code_source
+
+
+def test_fable_pyculator_2021_generated_model_archive_is_readable() -> None:
+    archive_path = Path("examples/fable_2021/generated_fable_2021_model.py.xz")
+
+    assert archive_path.exists()
+    with lzma.open(archive_path, "rt", encoding="utf-8") as archive:
+        source_prefix = archive.read(10000)
+
+    assert "Source workbook: 2021_Open_FABLECalculator.xlsx" in source_prefix
+    assert "def _sf_iferror" in source_prefix

@@ -24,7 +24,8 @@ Downloaded local artifacts in this environment:
      - primary wrapper benchmark
    * - ``2021_Open_FABLECalculator.xlsx``
      - ``tmp/private-workbooks/2021_Open_FABLECalculator.xlsx``
-     - later generalizability check
+     - public 2021 benchmark source for the validated compressed generated model in
+       ``examples/fable_2021/``
 
 Source URLs and checksums are recorded in ``reference/fable-calculator/README.md`` and
 ``benchmarks/fable-calculator/manifest.json``.

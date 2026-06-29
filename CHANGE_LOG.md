@@ -121,3 +121,19 @@ This file records completed project work in chronological order.
   production-sized workbook models.
 - Closed Phase 7 after PR #53 merged to `main` and the post-merge Tests and Docs Pages workflows
   passed, including release-artifact checks and GitHub Pages deployment.
+- Activated Phase 8 on `feature/p8-validated-2021-generated-model`, created parent issue #54 and
+  child issues #59, #58, #55, #57, and #56, and scoped the phase around publishing a compressed 2021
+  generated-model artifact only if Modelwright validation reaches the same zero-mismatch
+  comparable-output standard used for the 2020 benchmark.
+- Completed the core Phase 8 validation path: Modelwright extraction, graph construction, formula
+  translation, contract inference, Python generation, generated-model execution, and cached-output
+  comparison passed for the public 2021 FABLE-C workbook with 281,922 comparable outputs, 281,922
+  matches, 0 mismatches, and 15,080 non-comparable cached blank formula outputs recorded as boundary
+  evidence.
+- Published the approved compressed 2021 generated model under
+  `examples/fable_2021/generated_fable_2021_model.py.xz`, added sanitized validation evidence in
+  `examples/fable_2021/README.md` and `planning/phase-8-2021-validation-summary.md`, and updated the
+  2021 notebook to materialize that archive into ignored `tmp/generated-models/fable-2021/` working
+  space.
+- Merged upstream Modelwright PR #204 at `c3734d3` to fix generated `VLOOKUP` `#N/A` propagation,
+  then reran the 2021 generation/validation path and recorded the clean Phase 8 verification suite.

@@ -11,8 +11,10 @@ The goal is to keep Modelwright generic while collecting FABLE-C conventions in 
 - run a generated Modelwright model with the selected scenario inputs;
 - render standard FABLE outputs as pandas tables and matplotlib figures.
 
-This repository does not store original FABLE Calculator workbooks, generated Python clones, or raw
-validation outputs. Keep those under ignored `tmp/` paths.
+This repository does not store original FABLE Calculator workbooks, decompressed generated Python
+clones, or raw validation outputs. Keep those under ignored `tmp/` paths. The public 2021 generated
+model is the one explicit exception: it is tracked as a compressed, validation-backed artifact under
+`examples/fable_2021/`.
 
 ## Development Workflow
 
@@ -164,6 +166,11 @@ from fable_pyculator import run_2021_notebook_loop
 result = run_2021_notebook_loop({"gdp_scen": "SSP1"}, include_figures=False)
 ```
 
+The 2021 example notebook can materialize
+`examples/fable_2021/generated_fable_2021_model.py.xz` into the ignored generated-model path above.
+Phase 8 validated that generated model against the public 2021 workbook with 281,922 comparable
+outputs, 281,922 matches, and 0 mismatches.
+
 FABLE Pyculator discovers wrapper metadata and renders notebook surfaces. It does not currently
 generate Modelwright `contract.json`, `expressions.json`, or `constants.json` files from a FABLE
 workbook. See `docs/guides/generated-model-artifacts.rst` for the generated-model artifact boundary
@@ -181,8 +188,9 @@ examples/notebooks/fable-pyculator-2021-loop.ipynb
 ```
 
 The 2020 notebook is intentionally committed after a successful 2020 benchmark run so GitHub can
-render the example tables and figure directly in the browser. The 2021 notebook is a clean artifact
-wiring template and requires a matching local 2021 generated model before it can run the model.
+render the example tables and figure directly in the browser. The 2021 notebook is a runnable
+artifact-wiring template: it still requires the ignored local workbook, but it can restore the
+validated generated model from the tracked compressed 2021 archive.
 
 In VSCode, point the notebook kernel at the `.venv` created in the `fable-pyculator` repo root.
 The notebook setup cell prints the active environment prefix and warns if the selected kernel does
@@ -194,7 +202,8 @@ The Sphinx guide expands this into a full workflow under
 
 `fable-pyculator` is pre-release. The current alpha line is `0.1.0a1`; alpha releases must not be
 described as stable public API compatibility, full editable scenario-definition widgets, production
-readiness, full generated-model equivalence, or arbitrary country-calculator support.
+readiness, or arbitrary country-calculator support. Generated-model equivalence claims are limited
+to the exact 2020 and 2021 public FABLE-C validation evidence recorded in the docs.
 
 The public API is intentionally small while the FABLE-specific conventions are being discovered from
 real country calculators.
