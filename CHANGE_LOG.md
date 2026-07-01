@@ -183,3 +183,5 @@ This file records completed project work in chronological order.
   through #89, and implemented a plan-only FABLE Pyculator FreshForge provider with a public-safe
   2021 notebook workflow example, Sphinx docs, entry-point metadata, and provider discovery/planning
   tests.
+- Closed Phase 9 after PR #90 merged to `main`, post-merge Test and Docs Pages workflows passed, and
+  live docs verification confirmed the new provider guide and API reference content were deployed.

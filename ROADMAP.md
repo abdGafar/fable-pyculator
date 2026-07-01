@@ -811,7 +811,7 @@ GitHub parent issue: #61.
 
 Active branch: `feature/p9-fable-freshforge-provider`.
 
-Status: active.
+Status: complete.
 
 Goal: add a plan-only FreshForge provider for FABLE Pyculator notebook workflow stages after the
 Modelwright FreshForge provider pilot exists. The provider should expose FABLE-specific workbook
@@ -839,12 +839,12 @@ generation, execution, and validation in Modelwright.
   - [x] Link guide from docs index and API reference.
   - [x] Add tests for metadata, entry point, import boundary, example planning, and diagnostics.
   - [x] Keep FreshForge-present tests skipped when FreshForge is unavailable.
-- [ ] P9.5 Verify, PR, and close phase. Child issue: #89.
+- [x] P9.5 Verify, PR, and close phase. Child issue: #89.
   - [x] Run Ruff, pytest, Sphinx, docs theme verification, checksums, release artifact checks, and
         `git diff --check`.
-  - [ ] Open PR from `feature/p9-fable-freshforge-provider` to `main`.
-  - [ ] Merge only after CI passes.
-  - [ ] Confirm post-merge `Test` and `Docs Pages` workflows before closing parent #61.
+  - [x] Open PR from `feature/p9-fable-freshforge-provider` to `main`.
+  - [x] Merge only after CI passes.
+  - [x] Confirm post-merge `Test` and `Docs Pages` workflows before closing parent #61.
 
 Acceptance boundary:
 
@@ -875,6 +875,17 @@ Verification evidence:
 - `sha256sum -c benchmarks/fable-calculator/checksums.sha256` passed.
 - `scripts/check_release_artifacts.sh` passed.
 - `git diff --check` passed.
+
+Closeout evidence:
+
+- Phase 9 child issues #85, #86, #87, #88, and #89 are closed.
+- Phase 9 PR #90 merged to `main` with merge commit `33d5903`.
+- Post-merge `Test` workflow passed on `main`, including quality, pytest/docs, and release-artifact
+  jobs.
+- Post-merge `Docs Pages` workflow passed on `main`, including Sphinx build, Read the Docs theme
+  artifact verification, artifact upload, and GitHub Pages deployment.
+- Live docs verification confirmed `guides/freshforge-provider-integration.html` documents the
+  plan-only provider and `reference/api.html` includes `fable_pyculator.freshforge`.
 
 ## Phase 10: Cross-Package FreshForge Workflow Example
 
