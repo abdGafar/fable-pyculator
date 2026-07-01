@@ -72,6 +72,9 @@ Repository = "https://github.com/UBC-FRESH/fable-pyculator"
 Issues = "https://github.com/UBC-FRESH/fable-pyculator/issues"
 Changelog = "https://github.com/UBC-FRESH/fable-pyculator/blob/main/CHANGE_LOG.md"
 
+[project.entry-points."freshforge.providers"]
+fable_pyculator = "fable_pyculator.freshforge:provider_factory"
+
 [tool.setuptools.packages.find]
 where = ["src"]
 

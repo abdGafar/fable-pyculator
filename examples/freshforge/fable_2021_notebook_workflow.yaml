@@ -1,0 +1,71 @@
+workflow:
+  id: fable_2021_notebook_workflow
+  name: FABLE 2021 notebook workflow plan
+  description: Plan-only FABLE Pyculator workflow for deriving 2021 output refs and notebook surfaces.
+nodes:
+  - id: discover_notebook_spec
+    provider: fable_pyculator.notebook_spec_discover
+    outputs:
+      notebook_spec: fable_2021_notebook_spec
+    parameters:
+      workbook: tmp/private-workbooks/2021_Open_FABLECalculator.xlsx
+      workbook_id: fable-c-2021
+    artifacts:
+      spec_summary: tmp/generated-models/fable-2021/fable-pyculator-spec-summary.json
+
+  - id: derive_output_refs
+    provider: fable_pyculator.output_refs_derive
+    needs:
+      - discover_notebook_spec
+    inputs:
+      notebook_spec: discover_notebook_spec.notebook_spec
+    outputs:
+      output_refs: fable_2021_output_refs
+    parameters:
+      column_flavour_tags: OUTPUT-*
+    artifacts:
+      output_refs: tmp/generated-models/fable-2021/output_refs.json
+
+  - id: prepare_validation_scenario
+    provider: fable_pyculator.validation_scenario_prepare
+    needs:
+      - derive_output_refs
+    inputs:
+      output_refs: derive_output_refs.output_refs
+    outputs:
+      validation_scenario: fable_2021_validation_scenario
+    parameters:
+      scenario_id: fable-c-2021-freshforge-provider-plan
+      source_workbook: tmp/private-workbooks/2021_Open_FABLECalculator.xlsx
+      generated_model: tmp/generated-models/fable-2021/generated_fable_2021_model.py
+    artifacts:
+      validation_scenario: tmp/generated-models/fable-2021/validation-scenario.json
+
+  - id: build_modelwright_workflow
+    provider: fable_pyculator.modelwright_workflow_build
+    needs:
+      - prepare_validation_scenario
+    inputs:
+      output_refs: derive_output_refs.output_refs
+      validation_scenario: prepare_validation_scenario.validation_scenario
+    outputs:
+      modelwright_workflow: fable_2021_modelwright_workflow
+    parameters:
+      workflow_id: fable_2021_modelwright_run
+      module_name: generated_fable_2021_model
+    artifacts:
+      modelwright_workflow: tmp/generated-models/fable-2021/freshforge-modelwright-run-workflow.json
+
+  - id: plan_notebook_loop
+    provider: fable_pyculator.notebook_loop_plan
+    needs:
+      - build_modelwright_workflow
+    inputs:
+      notebook_spec: discover_notebook_spec.notebook_spec
+      generated_model: tmp/generated-models/fable-2021/generated_fable_2021_model.py
+    outputs:
+      notebook_loop_result: fable_2021_notebook_loop_result
+    parameters:
+      scenario_name: freshforge-2021
+    artifacts:
+      notebook_result_summary: tmp/generated-models/fable-2021/notebook-result-summary.json

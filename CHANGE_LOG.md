@@ -179,3 +179,7 @@ This file records completed project work in chronological order.
 - Closed Phase 12 after PR #84 merged to `main`, post-merge Test and Docs Pages workflows passed,
   and live docs verification confirmed the new workflow-helper API and notebook-control guide content
   were deployed.
+- Reactivated skipped Phase 9 on `feature/p9-fable-freshforge-provider`, created child issues #85
+  through #89, and implemented a plan-only FABLE Pyculator FreshForge provider with a public-safe
+  2021 notebook workflow example, Sphinx docs, entry-point metadata, and provider discovery/planning
+  tests.
