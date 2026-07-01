@@ -9,6 +9,8 @@ Modelwright-generated Python models while preserving Modelwright as the generic 
 
 - Phase 8 is closed: the validated 2021 FABLE-C generated model is published as a compressed repo
   artifact, PR #60 merged, and post-merge Test and Docs Pages workflows passed.
+- Phase 9 was reactivated after Phase 12 to fill the skipped FreshForge provider pilot slot with a
+  thin plan-only provider over the package workflow helpers.
 - Phase 10 is closed: the Abdulateef-facing 2021 FreshForge build-plan notebook is tracked, PR #67
   merged, and post-merge Test and Docs Pages workflows passed.
 - Phase 11 is closed: the Abdulateef-facing 2021 FreshForge-run notebook is tracked, PR #74 merged,
@@ -807,18 +809,42 @@ Closeout evidence:
 
 GitHub parent issue: #61.
 
-Status: planned backlog.
+Active branch: `feature/p9-fable-freshforge-provider`.
+
+Status: active.
 
 Goal: add a plan-only FreshForge provider for FABLE Pyculator notebook workflow stages after the
 Modelwright FreshForge provider pilot exists. The provider should expose FABLE-specific workbook
 surface discovery and notebook-loop planning while keeping generic generated-model inference,
 generation, execution, and validation in Modelwright.
 
-- [ ] P9.1 Define FABLE Pyculator FreshForge provider boundary.
-- [ ] P9.2 Add plan-only FABLE notebook workflow node vocabulary.
-- [ ] P9.3 Add public-safe FABLE notebook workflow example.
-- [ ] P9.4 Add docs and tests for provider discovery/planning.
-- [ ] P9.5 Verify, PR, and close phase.
+- [x] P9.1 Define FABLE Pyculator FreshForge provider boundary. Child issue: #85.
+  - [x] Reactivate Phase 9 in the roadmap after Phase 12.
+  - [x] Keep the provider plan-only.
+  - [x] Record that Modelwright keeps generated-model mechanics.
+  - [x] Record that FABLE Pyculator owns FABLE output-ref/notebook semantics.
+- [x] P9.2 Add plan-only FABLE notebook workflow node vocabulary. Child issue: #86.
+  - [x] Add `fable_pyculator.freshforge`.
+  - [x] Add provider id `fable_pyculator`.
+  - [x] Add provider factory `fable_pyculator.freshforge:provider_factory`.
+  - [x] Add plan-only node metadata and validation diagnostics.
+  - [x] Add a PyPI-safe `freshforge.providers` entry point without a FreshForge dependency.
+- [x] P9.3 Add public-safe FABLE notebook workflow example. Child issue: #87.
+  - [x] Add `examples/freshforge/fable_2021_notebook_workflow.yaml`.
+  - [x] Use only public-safe ignored `tmp/` artifact paths.
+  - [x] Compose FABLE Pyculator nodes around downstream Modelwright workflow artifact boundaries.
+  - [x] Keep the example plan-only.
+- [x] P9.4 Add docs and tests for provider discovery/planning. Child issue: #88.
+  - [x] Add Sphinx provider guide.
+  - [x] Link guide from docs index and API reference.
+  - [x] Add tests for metadata, entry point, import boundary, example planning, and diagnostics.
+  - [x] Keep FreshForge-present tests skipped when FreshForge is unavailable.
+- [ ] P9.5 Verify, PR, and close phase. Child issue: #89.
+  - [x] Run Ruff, pytest, Sphinx, docs theme verification, checksums, release artifact checks, and
+        `git diff --check`.
+  - [ ] Open PR from `feature/p9-fable-freshforge-provider` to `main`.
+  - [ ] Merge only after CI passes.
+  - [ ] Confirm post-merge `Test` and `Docs Pages` workflows before closing parent #61.
 
 Acceptance boundary:
 
@@ -826,6 +852,29 @@ Acceptance boundary:
 - Must not claim FreshForge executes FABLE notebook loops or materializes artifacts.
 - Must not move generic Modelwright conversion logic into FABLE Pyculator.
 - Must not claim additional FABLE country-calculator compatibility from this planning layer alone.
+
+Implementation evidence:
+
+- Added `fable_pyculator.freshforge` with lazy FreshForge imports, provider id `fable_pyculator`,
+  and a plan-only provider factory.
+- Added plan-only node metadata for notebook spec discovery, output-ref derivation,
+  validation-scenario preparation, Modelwright workflow construction, and notebook-loop planning.
+- Added a PyPI-safe `freshforge.providers` entry point without adding a FreshForge runtime
+  dependency.
+- Added `examples/freshforge/fable_2021_notebook_workflow.yaml` as a public-safe plan-only workflow.
+- Added `docs/guides/freshforge-provider-integration.rst`, linked it from the docs index and API
+  reference, and added provider discovery/planning tests.
+
+Verification evidence:
+
+- `.venv/bin/python -m pytest tests/test_freshforge_integration.py -q` passed with 6 tests.
+- `.venv/bin/python -m ruff check .` passed.
+- `.venv/bin/python -m pytest` passed with 51 tests and 9 workbook-backed skips.
+- `.venv/bin/sphinx-build -b html docs _build/html -W` passed.
+- `.venv/bin/python scripts/verify_docs_theme.py _build/html` passed.
+- `sha256sum -c benchmarks/fable-calculator/checksums.sha256` passed.
+- `scripts/check_release_artifacts.sh` passed.
+- `git diff --check` passed.
 
 ## Phase 10: Cross-Package FreshForge Workflow Example
 

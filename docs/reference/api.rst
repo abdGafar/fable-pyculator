@@ -46,3 +46,9 @@ FreshForge Workflow Helpers
 
 .. automodule:: fable_pyculator.workflows
    :members:
+
+FreshForge Provider
+-------------------
+
+.. automodule:: fable_pyculator.freshforge
+   :members:

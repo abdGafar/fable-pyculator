@@ -14,3 +14,6 @@ here. Put local working artifacts under `tmp/`.
 - `fable-pyculator-2021-freshforge-run.ipynb`: run-oriented companion notebook that derives 2021
   output refs, writes the FreshForge workflow, and gates the full Modelwright build behind
   `RUN_FRESHFORGE = False`.
+
+The FreshForge provider example in `../freshforge/fable_2021_notebook_workflow.yaml` is a plan-only
+workflow graph for the same FABLE-specific notebook boundary.
