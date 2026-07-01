@@ -14,6 +14,10 @@ This file records completed project work in chronological order.
   the Docs theme verification, public workbook checksums, release artifact checks with a clean wheel
   install, validation-evidence packaging smoke test, and import/API smoke tests confirming the
   FABLE Pyculator and Modelwright release-train versions.
+- Published `fable-pyculator==0.1.0a2` to PyPI from tag `v0.1.0a2`, verified the PyPI wheel and
+  sdist records, smoke-tested a clean PyPI install that imported `fable_pyculator 0.1.0a2` with
+  `modelwright 0.1.0a7`, created the GitHub prerelease, and recorded post-merge Test plus Docs Pages
+  workflow success for PR #121.
 - Activated Phase 16 on `feature/p16-validation-evidence-packaging`, created child issues #112,
   #110, #111, #113, and #114 under parent issue #79, and scoped the phase around compact validation
   evidence summaries from restored local artifacts plus an extraction-only opt-in benchmark workflow.

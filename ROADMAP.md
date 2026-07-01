@@ -23,8 +23,8 @@ Modelwright-generated Python models while preserving Modelwright as the generic 
   merged, and post-merge Test and Docs Pages workflows passed.
 - Phase 16 is closed: validation evidence packaging and the opt-in benchmark evidence workflow are
   tracked, PR #115 merged, and post-merge Test and Docs Pages workflows passed.
-- Phase 17 is active: prepare and publish `v0.1.0a2` as the FABLE workflow automation alpha in the
-  coordinated FreshForge, Modelwright, and FABLE Pyculator release train.
+- Phase 17 is closed: `v0.1.0a2` is published to PyPI and GitHub as the FABLE workflow automation
+  alpha, PR #121 merged, and post-merge Test and Docs Pages workflows passed.
 - Keep Sphinx docs deployment as a phase closeout gate: every phase PR must pass the docs build, and
   the merge to `main` must trigger the GitHub Pages deployment workflow.
 
@@ -1349,37 +1349,37 @@ Local verification evidence:
 
 GitHub parent issue: #116.
 
-Active branch: `feature/p17-v0.1.0a2-release`.
+Release branch: `feature/p17-v0.1.0a2-release`.
 
-Status: active.
+Status: complete.
 
 Goal: publish `fable-pyculator==0.1.0a2` as the FABLE workflow automation alpha in the coordinated
 FreshForge -> Modelwright -> FABLE Pyculator release train.
 
-- [ ] P17.1 Bump version and dependency metadata. Child issue: #120.
-  - Status: complete locally.
+- [x] P17.1 Bump version and dependency metadata. Child issue: #120.
+  - Status: complete.
   - [x] Bump package version and import version to `0.1.0a2`.
   - [x] Bump FABLE Pyculator FreshForge provider metadata to `0.1.0a2`.
   - [x] Raise the Modelwright dependency floor to `modelwright[notebook]>=0.1.0a7`.
   - [x] Update version assertions and release artifact checks.
-- [ ] P17.2 Update release docs and alpha boundary. Child issue: #118.
-  - Status: complete locally.
+- [x] P17.2 Update release docs and alpha boundary. Child issue: #118.
+  - Status: complete.
   - [x] Update the release deployment guide for `v0.1.0a2`.
   - [x] Update README alpha-line language and automation scope.
   - [x] Update FreshForge installation guidance to use `v0.1.0a2`.
   - [x] Record local verification and release evidence after checks pass.
-- [ ] P17.3 Verify release candidate and smoke tests. Child issue: #119.
-  - Status: complete locally.
+- [x] P17.3 Verify release candidate and smoke tests. Child issue: #119.
+  - Status: complete.
   - [x] Run full local verification.
-  - [ ] Open and merge the release PR after CI passes.
-  - [ ] Confirm post-merge Test and Docs Pages workflows pass.
-- [ ] P17.4 Publish PyPI/GitHub release and close phase. Child issue: #117.
-  - Status: pending.
-  - [ ] Push annotated `v0.1.0a2` tag.
-  - [ ] Confirm PyPI publication.
-  - [ ] Verify clean install from PyPI.
-  - [ ] Create GitHub prerelease.
-  - [ ] Close child issues and parent issue after evidence is recorded.
+  - [x] Open and merge the release PR after CI passes.
+  - [x] Confirm post-merge Test and Docs Pages workflows pass.
+- [x] P17.4 Publish PyPI/GitHub release and close phase. Child issue: #117.
+  - Status: complete.
+  - [x] Push annotated `v0.1.0a2` tag.
+  - [x] Confirm PyPI publication.
+  - [x] Verify clean install from PyPI.
+  - [x] Create GitHub prerelease.
+  - [x] Close child issues and parent issue after evidence is recorded.
 
 Acceptance boundary:
 
@@ -1413,3 +1413,14 @@ Local verification evidence:
   conservative incomplete equivalence from restored local artifacts.
 - Import/API smoke test confirmed `fable_pyculator 0.1.0a2`, `modelwright 0.1.0a7`,
   version-specific validation-evidence paths, and version-specific FreshForge build paths.
+- PR #121 merged to `main` at merge commit `8148b4d`.
+- Post-merge `Test` workflow run #28540822913 passed.
+- Post-merge `Docs Pages` workflow run #28540823006 passed and deployed.
+- Tag `v0.1.0a2` was pushed from merge commit `8148b4d`.
+- Tag-triggered `Release` workflow run #28540880479 passed and published wheel and sdist artifacts
+  to PyPI.
+- PyPI JSON verification confirmed `fable-pyculator 0.1.0a2` lists
+  `fable_pyculator-0.1.0a2-py3-none-any.whl` and `fable_pyculator-0.1.0a2.tar.gz`.
+- Clean PyPI install of `fable-pyculator[notebook]==0.1.0a2` imported `fable_pyculator 0.1.0a2`
+  with `modelwright 0.1.0a7`.
+- GitHub prerelease published at `https://github.com/UBC-FRESH/fable-pyculator/releases/tag/v0.1.0a2`.
