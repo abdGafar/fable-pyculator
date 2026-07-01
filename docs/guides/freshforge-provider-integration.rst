@@ -14,12 +14,37 @@ Installation Boundary
 ---------------------
 
 FABLE Pyculator registers a ``freshforge.providers`` entry point, but it does not depend on
-FreshForge directly. Install FreshForge separately in development environments that need provider
-discovery or workflow planning.
+FreshForge directly. FreshForge can only discover that entry point after the current FABLE Pyculator
+checkout has been installed into the active environment. From the repository root, refresh the local
+editable install after pulling provider changes:
+
+.. code-block:: bash
+
+   scripts/bootstrap_dev_env.sh
+
+or, when the virtual environment already exists:
+
+.. code-block:: bash
+
+   source .venv/bin/activate
+   python -m pip install -e ".[dev,notebook,docs]"
+
+Then install FreshForge separately in development environments that need provider discovery or
+workflow planning:
 
 .. code-block:: bash
 
    python -m pip install "freshforge @ git+https://github.com/UBC-FRESH/freshforge.git@v0.1.0a1"
+
+Confirm that FreshForge can see the FABLE Pyculator provider before validating the example:
+
+.. code-block:: bash
+
+   freshforge providers
+
+The provider list should include ``fable_pyculator``. If validation reports
+``Provider 'fable_pyculator' is not registered``, reinstall FABLE Pyculator in the active
+environment with ``python -m pip install -e ".[dev,notebook,docs]"``.
 
 Normal imports remain FreshForge-free:
 
