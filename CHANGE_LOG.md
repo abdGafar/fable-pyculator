@@ -17,6 +17,8 @@ This file records completed project work in chronological order.
 - Verified the Phase 15 slice with Ruff, pytest, Sphinx warning-as-error docs, Read the Docs theme
   verification, workbook checksums, release artifact checks, whitespace checks, and a real 2021
   scenario-bundle dry-run smoke test against the restored local workbook.
+- Merged Phase 15 through PR #109 and confirmed post-merge Test workflow run #28537043841 plus Docs
+  Pages workflow run #28537043793 passed, including GitHub Pages deployment.
 - Activated Phase 14 on `feature/p14-version-general-fable-build-workflows`, created child issues
   #99, #101, #100, #102, and #98 under parent issue #77, and scoped the phase around
   version-general FABLE build workflows plus output-ref strategy comparison.

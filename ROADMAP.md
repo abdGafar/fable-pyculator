@@ -19,8 +19,8 @@ Modelwright-generated Python models while preserving Modelwright as the generic 
   post-merge Test and Docs Pages workflows passed.
 - Phase 14 is closed: version-general FABLE build workflow helpers and scripts are tracked, PR #103
   merged, and post-merge Test and Docs Pages workflows passed.
-- Phase 15 is active on `feature/p15-scenario-bundles-result-artifacts`: add a bounded
-  selection-control scenario-bundle pilot with rendered result artifacts under ignored `tmp/`.
+- Phase 15 is closed: scenario-bundle automation and rendered result artifacts are tracked, PR #109
+  merged, and post-merge Test and Docs Pages workflows passed.
 - `v0.1.0a1` has been published to TestPyPI and PyPI; future release work should target a new
   version.
 - Keep Sphinx docs deployment as a phase closeout gate: every phase PR must pass the docs build, and
@@ -1199,9 +1199,9 @@ Acceptance boundary:
 
 GitHub parent issue: #78.
 
-Active branch: `feature/p15-scenario-bundles-result-artifacts`.
+Active branch: merged via PR #109.
 
-Status: active.
+Status: complete.
 
 Goal: define and pilot scenario-bundle automation for FABLE notebook workflows, including reusable
 result table and figure artifact writers.
@@ -1228,11 +1228,11 @@ result table and figure artifact writers.
   - [x] Add a Sphinx scenario-bundle guide.
   - [x] Link README, notebook-control docs, docs index, and API reference.
   - [x] Add focused unit/script tests.
-- [ ] P15.5 Verify, merge, deploy docs, and close phase. Child issue: #108.
-  - Status: local verification complete; PR/merge/docs deployment pending.
+- [x] P15.5 Verify, merge, deploy docs, and close phase. Child issue: #108.
+  - Status: complete.
   - [x] Run full local verification.
-  - [ ] Open and merge PR after CI passes.
-  - [ ] Confirm post-merge Test and Docs Pages workflows pass.
+  - [x] Open and merge PR after CI passes.
+  - [x] Confirm post-merge Test and Docs Pages workflows pass.
 
 Acceptance boundary:
 
@@ -1263,6 +1263,9 @@ Local verification evidence:
 - `git diff --check` passed.
 - Real 2021 scenario-bundle dry-run smoke test passed for
   `examples/scenario-bundles/fable_2021_ssp_demo.yaml`.
+- PR #109 merged to `main` at merge commit `5e69427`.
+- Post-merge `Test` workflow run #28537043841 passed.
+- Post-merge `Docs Pages` workflow run #28537043793 passed and deployed.
 
 ## Phase 16: Validation Evidence Packaging And Opt-In Benchmark Workflow
 
