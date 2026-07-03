@@ -4,6 +4,29 @@ This file records completed project work in chronological order.
 
 ## 2026-07-03
 
+- Activated Phase 27 on `feature/p27-alpha-tester-notebook-hardening`, created parent issue #194
+  and child issues #195 through #199, and scoped the phase around alpha-tester notebook reliability,
+  an opt-in 2021 notebook-loop smoke check, skipped output-table diagnostics, and notebook-failure
+  issue hygiene.
+- Added `scripts/smoke_2021_notebook_loop.py`, default skipped-output-table diagnostics on
+  `NotebookLoopResult`, a notebook-run failure issue template, and docs guidance clarifying that
+  workbook-cached context values and screenshots are display/debugging aids rather than generated
+  equivalence evidence.
+- Verified Phase 27 locally with Ruff, full pytest (`147` passed and `12` skipped), warning-clean
+  Sphinx docs, Read the Docs theme verification, public workbook checksums, release artifact checks,
+  `git diff --check`, and a restored-artifact 2021 smoke run that passed in about 213 seconds.
+- Merged Phase 27 through PR #201 and confirmed post-merge Test workflow #28631757605 plus Docs
+  Pages workflow #28631757588 passed.
+- Fixed the 2021 loop notebook crash where rendering all default output tables with an `OUTPUT-*`
+  flavour filter raised on tables without matching output columns; default all-table rendering now
+  skips non-matching tables while explicit table requests still fail clearly.
+- Added an explicit 2021 loop notebook context-column proof cell for Abdulateef's output-table
+  rendering bug, showing `trade_resultstrade` and checking `PRODUCT`/`YEAR` values when restored
+  local 2021 artifacts are available.
+- Fixed Abdulateef's reported output-table rendering bug where context/support columns such as
+  `Product` and `Year` could display as missing when a generated model was built from narrow
+  `OUTPUT-*` refs; discovered output tables now retain cached workbook values for display-only
+  non-output columns while generated `OUTPUT-*` values remain the validation boundary.
 - Published a GitHub-only Phase 26 checkpoint release,
   `checkpoint-p26-scenario-definition-surface`, to mark the editable scenario-definition patch
   milestone without publishing a new PyPI package or changing the installed alpha version.

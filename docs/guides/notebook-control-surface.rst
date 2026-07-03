@@ -78,6 +78,12 @@ tagged ``DIRECT`` or ``AUX`` are kept by default so filtered frames still includ
        include_context_columns=False,
    )
 
+When a generated model was built from a narrow ``OUTPUT-*`` output-ref set, the generated run may not
+emit context/support cells such as ``Year`` or ``Product``. FABLE Pyculator fills those non-output
+display columns from cached workbook table values discovered with the notebook spec. Generated run
+values still take precedence, and missing ``OUTPUT-*`` cells remain missing so display context does
+not become validation evidence.
+
 2020 Notebook Loop
 ------------------
 
@@ -146,6 +152,24 @@ Use ``run_2021_notebook_loop`` after the source workbook is restored locally:
 The 2021 helper intentionally does not fall back to the compressed 2020 generated model. Phase 8
 validated the tracked 2021 artifact with 281,922 comparable outputs, 281,922 matches, and 0
 mismatches. For the generated-model artifact boundary, see :doc:`generated-model-artifacts`.
+
+After restoring the local 2021 workbook and generated model, maintainers and alpha testers can run
+the same notebook-loop smoke path from the shell:
+
+.. code-block:: bash
+
+   .venv/bin/python scripts/smoke_2021_notebook_loop.py --json
+
+The smoke command renders default ``OUTPUT-*`` tables without figures, reports skipped output tables
+that have no matching output columns, and checks that the ``trade_resultstrade`` context columns
+``PRODUCT`` and ``YEAR`` are populated. Those context columns come from workbook-cached table values
+for display only; they do not broaden the generated-model validation boundary. The restored-artifact
+2021 smoke can take a few minutes because it loads the source workbook and generated model.
+
+When ``run_notebook_loop`` renders all tables by default with a flavour filter such as ``OUTPUT-*``,
+tables with no matching output columns are recorded in
+``NotebookLoopResult.skipped_output_tables``. Explicitly requested tables still fail clearly if the
+requested filter does not match.
 
 Scenario Bundles
 ----------------
