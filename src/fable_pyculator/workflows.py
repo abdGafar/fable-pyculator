@@ -133,7 +133,7 @@ def prepare_freshforge_rebuild(
     artifact_dir: str | Path | None = None,
     workflow_filename: str = DEFAULT_WORKFLOW_FILENAME,
     output_ref_strategy: OutputRefStrategy = "output-columns",
-    column_flavour_tags: str | Sequence[str] | None = "OUTPUT-*",
+    column_flavour_tags: str | Sequence[str] | None = None,
     table_names: Sequence[str] | None = None,
     module_name: str | None = None,
     workflow_id: str | None = None,
@@ -218,7 +218,7 @@ def prepare_2021_freshforge_rebuild(
     artifact_dir: str | Path = DEFAULT_2021_ARTIFACT_DIR,
     workflow_filename: str = DEFAULT_2021_WORKFLOW_FILENAME,
     output_ref_strategy: OutputRefStrategy = "output-columns",
-    column_flavour_tags: str | Sequence[str] | None = "OUTPUT-*",
+    column_flavour_tags: str | Sequence[str] | None = None,
     table_names: Sequence[str] | None = None,
     module_name: str = "generated_fable_2021_model",
     workflow_id: str = "fable_2021_modelwright_run",
@@ -255,7 +255,7 @@ def derive_output_refs_for_strategy(
     spec: FableCalculatorSpec,
     *,
     strategy: OutputRefStrategy,
-    column_flavour_tags: str | Sequence[str] | None = "OUTPUT-*",
+    column_flavour_tags: str | Sequence[str] | None = None,
     table_names: Sequence[str] | None = None,
 ) -> tuple[str, ...]:
     """Derive sorted output refs using a named FABLE build strategy."""
@@ -278,7 +278,7 @@ def derive_output_refs_for_strategy(
 def derive_output_refs(
     spec: FableCalculatorSpec,
     *,
-    column_flavour_tags: str | Sequence[str] | None = "OUTPUT-*",
+    column_flavour_tags: str | Sequence[str] | None = None,
     table_names: Sequence[str] | None = None,
 ) -> tuple[str, ...]:
     """Derive sorted workbook cell refs from discovered output-table metadata.
